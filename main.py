@@ -32,8 +32,8 @@ def read_my_answers():
 
 class Data:
     def __init__(self):
-        self._right_answers = [
-            line.strip().replace(' ', '') for line in open('right_answers')]
+        self._right_answers = tuple(
+            line.strip().replace(' ', '') for line in open('right_answers'))
         self._my_answers = read_my_answers()
 
     def get_right_answer(self, ticket, question):
@@ -44,5 +44,14 @@ class Data:
 
 
 if __name__ == '__main__':
-    data = Data()
-    print(data.get_my_answer(ticket=10, question=15))
+    # data = Data()
+    ra = tuple(line.strip().replace(' ', '') for line in open('right_answers'))
+    my = tuple(line.strip().replace(' ', '') for line in open('my_answers'))
+    i = 32  # 1..64
+    q = 10  # номер вопроса в билете
+    c = 0  # счётчик ошибок
+    for t in range(40):
+        print(t + 1, ')', my[t][i - 1], ra[t][q - 1])
+        if my[t][i - 1] != ra[t][q - 1]:
+            c += 1
+    print('c =', c)
