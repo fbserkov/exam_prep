@@ -12,9 +12,9 @@ def read_my_answers():
             None, date(2020, 3, 11), date(2020, 3, 12), date(2020, 3, 17),
             date(2020, 3, 19),
         ] +
-        [date(2020, 3, 22) + timedelta(i) for i in range(13)] +
-        [date(2020, 4, 5) + timedelta(i) for i in range(5)] +
-        [date(2020, 4, 11) + timedelta(i) for i in range(6)]
+        [date(2020, 3, 22) + timedelta(_) for _ in range(13)] +
+        [date(2020, 4, 5) + timedelta(_) for _ in range(5)] +
+        [date(2020, 4, 11) + timedelta(_) for _ in range(6)]
     )
     questions_per_date = (
         (2, 1, 1, 3, 1, 3, 2, 2, 3, 2, 4) + 14 * (2, ) + (3, 3, 4, 2))
@@ -44,14 +44,4 @@ class Data:
 
 
 if __name__ == '__main__':
-    # data = Data()
-    ra = tuple(line.strip().replace(' ', '') for line in open('right_answers'))
-    my = tuple(line.strip().replace(' ', '') for line in open('my_answers'))
-    i = 32  # 1..64
-    q = 10  # номер вопроса в билете
-    c = 0  # счётчик ошибок
-    for t in range(40):
-        print(t + 1, ')', my[t][i - 1], ra[t][q - 1])
-        if my[t][i - 1] != ra[t][q - 1]:
-            c += 1
-    print('c =', c)
+    data = Data()
