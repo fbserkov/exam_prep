@@ -22,22 +22,24 @@ def read_my_answers():
     for couple in zip(questions_per_date, raw_dates):
         dates += couple[0] * (couple[1], )
 
-    file = open('my_answers_table', 'w')
-    raw_data = tuple(raw_data)
-    for i in range(64):
-        for j in range(40):
-            print(
-                dates[i], j + 1, sequence_of_questions[i], raw_data[j][i],
-                file=file,
-            )
-    file.close()
-    return
-
     my_answers = tuple(tuple([] for _ in range(20)) for _ in range(40))
     for i, ticket in enumerate(raw_data):
         for j, question in enumerate(ticket):
             my_answers[i][sequence_of_questions[j] - 1].append(
-                (dates[j], question))
+                (dates[j], int(question)))
+    return my_answers
+
+
+def read_my_answers_2():
+    my_answers = tuple(tuple([] for _ in range(20)) for _ in range(40))
+    for line in open('my_answers_table'):
+        _date, _ticket, _question, _answer = line.split()
+        if _date == 'None':
+            _date = None
+        else:
+            _date = date(*map(int, _date.split('-')))
+        my_answers[int(_ticket) - 1][int(_question) - 1].append(
+            (_date, int(_answer)))
     return my_answers
 
 
@@ -46,6 +48,7 @@ class Data:
         self._right_answers = tuple(
             line.strip().replace(' ', '') for line in open('right_answers'))
         self._my_answers = read_my_answers()
+        self._my_answers_2 = read_my_answers_2()
 
     def get_right_answer(self, ticket, question):
         return self._right_answers[ticket - 1][question - 1]
@@ -53,6 +56,11 @@ class Data:
     def get_my_answer(self, ticket, question):
         return self._my_answers[ticket - 1][question - 1]
 
+    def get_my_answer_2(self, ticket, question):
+        return self._my_answers_2[ticket - 1][question - 1]
+
 
 if __name__ == '__main__':
     data = Data()
+    print(data.get_my_answer(13, 16))
+    print(data.get_my_answer_2(13, 16))
