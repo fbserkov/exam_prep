@@ -22,6 +22,17 @@ def read_my_answers():
     for couple in zip(questions_per_date, raw_dates):
         dates += couple[0] * (couple[1], )
 
+    file = open('my_answers_table', 'w')
+    raw_data = tuple(raw_data)
+    for i in range(64):
+        for j in range(40):
+            print(
+                dates[i], j + 1, sequence_of_questions[i], raw_data[j][i],
+                file=file,
+            )
+    file.close()
+    return
+
     my_answers = tuple(tuple([] for _ in range(20)) for _ in range(40))
     for i, ticket in enumerate(raw_data):
         for j, question in enumerate(ticket):
