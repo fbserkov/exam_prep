@@ -1,6 +1,16 @@
 from datetime import date
 
 
+class Database:
+    def __init__(self):
+        self._right_answers = tuple(
+            line.strip().replace(' ', '') for line in open('right_answers'))
+
+    def get_result(self, table_name, ticket, question):
+        if table_name == 'right_answers':
+            return self._right_answers[ticket - 1][question - 1]
+
+
 def read_my_answers():
     my_answers = tuple(tuple([] for _ in range(20)) for _ in range(40))
     for line in open('my_answers'):
@@ -16,12 +26,11 @@ def read_my_answers():
 
 class Data:
     def __init__(self):
-        self._right_answers = tuple(
-            line.strip().replace(' ', '') for line in open('right_answers'))
+        self._db = Database()
         self._my_answers = read_my_answers()
 
     def get_right_answer(self, ticket, question):
-        return self._right_answers[ticket - 1][question - 1]
+        return self._db.get_result('right_answers', ticket, question)
 
     def get_my_answer(self, ticket, question):
         return self._my_answers[ticket - 1][question - 1]
@@ -29,4 +38,5 @@ class Data:
 
 if __name__ == '__main__':
     data = Data()
+    print(data.get_right_answer(13, 16))
     print(data.get_my_answer(13, 16))
