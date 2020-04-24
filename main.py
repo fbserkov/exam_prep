@@ -1,18 +1,10 @@
 from database import Database
-
-
-class RightAnswers:
-    def __init__(self):
-        self._right_answers = tuple(
-            line.strip().replace(' ', '') for line in open('right_answers'))
-
-    def get_value(self, ticket, question):
-        return int(self._right_answers[ticket - 1][question - 1])
+from right_answers import RightAnswers
 
 
 class MyAnswers:
     def __init__(self):
-        self._right_answers = RightAnswers()
+        self._right_answers = RightAnswers(filename='right_answers')
         self._my_answers = Database(filename='my_answers')
 
     def get_my_answers(self, ticket, question):
