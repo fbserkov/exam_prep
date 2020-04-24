@@ -21,9 +21,10 @@ def print_fallacy_rating():
         (i + 1, j + 1, data.get_fallacy(ticket=i+1, question=j+1))
         for i in range(40) for j in range(20)
     )
+    result = (_ for _ in result if _[2] != 0)
     result = sorted(result, key=lambda _: _[2])
     for ticket, question, fallacy in result:
-        print(f'{fallacy:.2f}: Билет № {ticket}, Вопрос № {question}')
+        print(f'({fallacy:.2f}) Билет {ticket:2} Вопрос {question:2}')
 
 
 if __name__ == '__main__':
