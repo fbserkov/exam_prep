@@ -19,7 +19,7 @@ class MyAnswers:
         return max(_[0] for _ in self.get_my_answers(ticket, question) if _[0])
 
 
-def print_fallacy_rating():
+def print_fallacy_rating():  # TODO Тест для проверки результата сортировки
     result = tuple(
         (i + 1, j + 1, data.get_fallacy(ticket=i+1, question=j+1))
         for i in range(40) for j in range(20)
