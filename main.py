@@ -48,3 +48,4 @@ if __name__ == '__main__':
         print_fallacy_rating()
     if mode == 2:
         print_freshness_rating()
+    # TODO work on recent mistakes mode
