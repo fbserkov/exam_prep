@@ -42,7 +42,7 @@ def print_freshness_rating():  # TODO очень похожа на ..._fallacy_.
 
 if __name__ == '__main__':
     data = MyAnswers()
-    mode = 2
+    mode = 1
 
     if mode == 1:
         print_fallacy_rating()
