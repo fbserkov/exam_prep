@@ -27,7 +27,7 @@ def print_fallacy_rating():  # TODO Тест для проверки резул�
     result = (_ for _ in result if _[2] != 0)
     result = sorted(result, key=lambda _: _[2])
     for ticket, question, fallacy in result[-10:]:
-        print(f'({fallacy:.2f}) Билет {ticket:2} Вопрос {question:2}')
+        print(f'({fallacy:.3f}) Билет {ticket:2} Вопрос {question:2}')
 
 
 def print_freshness_rating():  # TODO очень похожа на ..._fallacy_...
